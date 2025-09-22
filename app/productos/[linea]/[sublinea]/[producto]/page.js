@@ -1,4 +1,4 @@
-import { getProductoByIds, getLineaById } from '@/app/lib/data';
+import { getProductoByIds } from '@/app/lib/data';
 import Link from 'next/link';
 import { ImageZoom } from '@/app/components/ImageZoom';
 import { CheckCircle } from 'lucide-react';
@@ -11,7 +11,6 @@ export default function ProductoPage({ params }) {
         return <div className="text-center py-40">Producto no encontrado.</div>;
     }
     
-    // Pasamos el ID de la línea a la sublínea para construir los links correctamente
     const sublineaConLineaId = {
         ...producto.sublinea,
         lineaId: producto.linea.id,
@@ -35,12 +34,14 @@ export default function ProductoPage({ params }) {
                      <ImageZoom src={producto.image} alt={producto.name} />
                 </div>
                 
+                {/* --- SECCIÓN DE DESCRIPCIÓN LARGA --- */}
                 {producto.longDescription && (
                     <div className="max-w-3xl mx-auto text-center mb-16">
                         <p className="text-lg text-base-text leading-relaxed">{producto.longDescription}</p>
                     </div>
                 )}
 
+                {/* --- SECCIÓN DE PUNTOS FUERTES --- */}
                 {hasKeyFeatures && (
                     <div className="mb-16">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -55,6 +56,7 @@ export default function ProductoPage({ params }) {
                     </div>
                 )}
                 
+                {/* --- SECCIÓN DE ESPECIFICACIONES TÉCNICAS --- */}
                 {hasSpecs && (
                     <div className="border-t pt-10">
                         <h3 className="font-bold text-2xl mb-6 text-center text-base-text">Especificaciones Técnicas</h3>
@@ -73,11 +75,8 @@ export default function ProductoPage({ params }) {
                     </div>
                 )}
 
-                {/* --- SECCIÓN DE PRODUCTOS RELACIONADOS --- */}
                 <RelatedProducts currentProductId={producto.id} sublinea={sublineaConLineaId} />
-
             </div>
         </div>
     );
 }
-

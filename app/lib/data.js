@@ -1,13 +1,12 @@
-// Esta función convierte cualquier texto en un ID seguro para las URLs.
 const createId = (text) => {
   return text
     .toLowerCase()
-    .normalize("NFD") // Separa acentos de las letras
-    .replace(/[\u0300-\u036f]/g, "") // Elimina los acentos
-    .replace(/[^a-z0-9 -]/g, "") // Elimina caracteres no alfanuméricos excepto espacios y guiones
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9 -]/g, "")
     .trim()
-    .replace(/\s+/g, "-") // Reemplaza espacios con guiones
-    .replace(/-+/g, "-"); // Elimina guiones duplicados
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
 };
 
 export const lineas = [

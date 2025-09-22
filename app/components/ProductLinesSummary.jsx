@@ -1,36 +1,9 @@
-"use client";
-
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { client } from '@/sanity/lib/client';
-import imageUrlBuilder from '@sanity/image-url';
-
-const builder = imageUrlBuilder(client);
-function urlFor(source) {
-  return builder.image(source);
-}
+import { getAllLineas } from '@/app/lib/data'; // Volvemos a importar de data.js
 
 export function ProductLinesSummary() {
-  const [lineas, setLineas] = useState([]);
-
-  useEffect(() => {
-    const fetchLineas = async () => {
-      // Pedimos los datos de todas las líneas a Sanity
-      const query = `*[_type == "linea"]{
-        _id, 
-        name, 
-        "id": id.current, 
-        description, 
-        heroImage, 
-        color
-      }`;
-      const data = await client.fetch(query);
-      setLineas(data);
-    };
-
-    fetchLineas();
-  }, []);
+  const lineas = getAllLineas();
 
   return (
     <section id="productos" className="bg-white pt-12 pb-20 md:pt-16 md:pb-32">
@@ -46,16 +19,14 @@ export function ProductLinesSummary() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {lineas.map((linea) => (
-            <div key={linea._id} className="border rounded-lg overflow-hidden group shadow-sm hover:shadow-xl transition-shadow duration-300">
+            <div key={linea.id} className="border rounded-lg overflow-hidden group shadow-sm hover:shadow-xl transition-shadow duration-300">
               <div className="relative w-full h-60 bg-gray-200">
-                {linea.heroImage && (
-                  <Image 
-                    src={urlFor(linea.heroImage).width(400).url()}
-                    alt={`Línea ${linea.name}`} 
-                    fill 
-                    className="object-cover group-hover:scale-105 transition-transform duration-300" 
-                  />
-                )}
+                <Image 
+                  src={linea.heroImage} 
+                  alt={`Línea ${linea.name}`} 
+                  fill 
+                  className="object-cover group-hover:scale-105 transition-transform duration-300" 
+                />
               </div>
               <div className="p-6 bg-white flex flex-col items-center text-center">
                 <h3 className="font-bold text-2xl text-primary mb-2">{linea.name}</h3>

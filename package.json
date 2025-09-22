@@ -9,16 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "lucide-react": "^0.544.0",
+    "@sanity/image-url": "^1.0.2",
+    "@sanity/vision": "^3.50.0",
+    "lucide-react": "^0.395.0",
     "next": "14.2.4",
+    "next-sanity": "^7.1.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "sanity": "^3.50.0",
+    "styled-components": "^6.1.11"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.19",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1"
+    "autoprefixer": "^10.4.19",
+    "typescript": "^5"
   }
 }

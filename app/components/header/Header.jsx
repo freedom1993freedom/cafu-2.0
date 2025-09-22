@@ -1,12 +1,23 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, Search } from 'lucide-react';
-import { lineas } from '@/app/lib/data';
+import { client } from '@/sanity/lib/client';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [lineas, setLineas] = useState([]);
+
+  useEffect(() => {
+    const fetchLineas = async () => {
+      const query = `*[_type == "linea"]{name, "id": id.current}`;
+      const data = await client.fetch(query);
+      setLineas(data);
+    };
+
+    fetchLineas();
+  }, []);
 
   const navLinks = [
     { href: '/#somos-cafu', label: 'Somos Cafu' },
@@ -44,22 +55,19 @@ export function Header() {
           </div>
         </nav>
         
-        {/* --- CAMBIOS AQUÍ --- */}
         <div className="hidden md:flex items-center gap-4">
-          {/* Este es el nuevo "falso" campo de búsqueda, ahora más grande */}
           <Link
             href="/buscar"
-            className="flex items-center gap-3 bg-gray-100 hover:bg-gray-200 text-light-text px-6 py-3 rounded-full transition-colors duration-300"
+            className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-light-text px-6 py-3 rounded-full transition-colors duration-300"
           >
             <Search size={20} />
             <span className="text-base italic">Buscar productos...</span>
           </Link>
           
-          {/* Botón de Área de Clientes sin cambios */}
           <Link
             href="https://sistema.cliente.com/login"
             target="_blank"
-            className="bg-secondary text-white font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105"
+            className="bg-secondary text-white font-bold py-3 px-6 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105"
           >
             Área de Clientes
           </Link>
@@ -72,6 +80,7 @@ export function Header() {
         </div>
       </div>
 
+      {/* Panel de Menú Móvil - CORRECCIÓN AQUI */}
       <div className={`md:hidden absolute top-20 left-0 w-full bg-white shadow-lg transition-transform duration-300 ease-in-out ${isMenuOpen ? 'transform translate-x-0' : 'transform -translate-x-full'}`}>
         <nav className="flex flex-col p-6 space-y-4">
           {navLinks.map(link => (

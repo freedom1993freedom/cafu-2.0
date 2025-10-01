@@ -11,6 +11,7 @@ export function Header() {
 
   const navLinks = [
     { href: '/#somos-cafu', label: 'Somos Cafu' },
+    { href: '/#novedades', label: 'Novedades' },
     { href: '/#logistica', label: 'Logística' },
     { href: '/#contacto', label: 'Contacto' },
   ];
@@ -18,9 +19,7 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-sm shadow-md z-50 h-20">
       <div className="container mx-auto px-6 h-full flex justify-between items-center">
-        
-        {/* --- CAMBIO AQUÍ --- */}
-        {/* Reemplazamos el texto por el componente Image con tu logo */}
+
         <Link href="/">
           <Image
             src="/images/logo.png"
@@ -100,4 +99,3 @@ export function Header() {
     </header>
   );
 }
-

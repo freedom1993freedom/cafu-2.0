@@ -393,6 +393,25 @@ export const lineas = [
   }
 ];
 
+export const novedades = [
+  {
+    id: 'black-friday-2025',
+    tag: 'Promoción',
+    title: 'Black Friday: ¡Hasta 30% de Descuento en Línea Volare!',
+    description: 'Adelantate a las ofertas de fin de año. Durante todo el mes de Noviembre, aprovechá descuentos exclusivos en toda la grifería de la línea Volare. Stock limitado.',
+    image: '/images/hero/placeholder.jpg',
+    link: '/productos/volare',
+  },
+  {
+    id: 'nueva-linea-roma-metal',
+    tag: 'Lanzamiento',
+    title: 'Nueva Línea Roma Metal',
+    description: 'Descubrí la robustez y el diseño clásico de la nueva línea Roma Metal. Durabilidad y estilo que perduran.',
+    image: '/images/hero/placeholder.jpg',
+    link: '/productos/volare',
+  },
+];
+
 export const getAllLineas = () => lineas;
 export const getLineaById = (id) => lineas.find(linea => linea.id === id);
 export const getProductoByIds = (lineaId, sublineaId, productoId) => {
